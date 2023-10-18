@@ -25,7 +25,8 @@ SECRET_KEY = 'vs=tzqf)*tn*=%x!_q^nbde4%gf25liav(o$wh&a2e@ks$-bcb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'balegales.compustrom.com' ]
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.3.100', 'localhost',
+                 'balegales.compustrom.com']
 
 
 # Application definition
@@ -89,19 +90,20 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
+BASE_VALIDATOR = 'django.contrib.auth.password_validation.'
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': BASE_VALIDATOR + 'UserAttributeSimilarityValidator'
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': BASE_VALIDATOR + 'MinimumLengthValidator'
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': BASE_VALIDATOR + 'CommonPasswordValidator'
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+        'NAME': BASE_VALIDATOR + 'NumericPasswordValidator'
+    }
 ]
 
 

@@ -4,3 +4,4 @@ legales/__init__.py
 legales/migrations/
 **.pyc
 static/
+**~
