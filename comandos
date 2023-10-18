@@ -1,0 +1,5 @@
+psql -d django_db -h localhost -U agalaz -w
+./manage.py collectstatic
+./manage.py makemigrations legales
+./manage.py migrate
+./manage.py runserver 0.0.0.0:8001

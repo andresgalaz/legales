@@ -1,6 +1,4 @@
-# from django.conf import settings
 from django.db import models
-# from django.utils import timezone
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -8,14 +6,14 @@ class Company(models.Model):
     nombre = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.nombre
+        return str(self.id) + ' - ' + self.nombre
 
 
 class Jurisdiccion(models.Model):
     nombre = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.nombre
+        return str(self.id) + ' - ' + self.nombre
 
 
 class Abogado(models.Model):
@@ -25,49 +23,49 @@ class Abogado(models.Model):
     telefono2 = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
-        return self.nombre
+        return str(self.id) + ' - ' + self.nombre
 
 
 class BonoJus(models.Model):
     nombre = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.nombre
+        return str(self.id) + ' - ' + self.nombre
 
 
 class Excepcion(models.Model):
     nombre = models.CharField(max_length=120)
 
     def __str__(self):
-        return self.nombre
+        return str(self.id) + ' - ' + self.nombre
 
 
 class EstadoProcesal(models.Model):
     nombre = models.CharField(max_length=40)
 
     def __str__(self):
-        return self.nombre
+        return str(self.id) + ' - ' + self.nombre
 
 
 class ObservacionPMP(models.Model):
     nombre = models.CharField(max_length=80)
 
     def __str__(self):
-        return str(self.id) + self.nombre
+        return str(self.id) + ' - ' + self.nombre
 
 
 class EstadoNegociacion(models.Model):
     nombre = models.CharField(max_length=40)
 
     def __str__(self):
-        return self.nombre
+        return str(self.id) + ' - ' + self.nombre
 
 
 class ObservacionPericia(models.Model):
     nombre = models.CharField(max_length=80)
 
     def __str__(self):
-        return self.nombre
+        return str(self.id) + ' - ' + self.nombre
 
 
 class Causa(models.Model):
