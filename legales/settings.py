@@ -25,7 +25,7 @@ SECRET_KEY = 'vs=tzqf)*tn*=%x!_q^nbde4%gf25liav(o$wh&a2e@ks$-bcb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '34.212.161.78' ]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'balegales.compustrom.com' ]
 
 
 # Application definition
