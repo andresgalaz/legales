@@ -53,7 +53,7 @@ class ObservacionPMP(models.Model):
     nombre = models.CharField(max_length=80)
 
     def __str__(self):
-        return self.nombre
+        return str(self.id) + self.nombre
 
 
 class EstadoNegociacion(models.Model):
