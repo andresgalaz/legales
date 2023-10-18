@@ -20,9 +20,9 @@ class Jurisdiccion(models.Model):
 
 class Abogado(models.Model):
     nombre = models.CharField(max_length=120)
-    correo = models.CharField(max_length=120, null=True)
-    telefono1 = models.CharField(max_length=20, null=True)
-    telefono2 = models.CharField(max_length=20, null=True)
+    correo = models.CharField(max_length=120, blank=True, null=True)
+    telefono1 = models.CharField(max_length=20, blank=True, null=True)
+    telefono2 = models.CharField(max_length=20, blank=True, null=True)
 
     def __str__(self):
         return self.nombre
@@ -71,7 +71,7 @@ class ObservacionPericia(models.Model):
 
 
 class Causa(models.Model):
-    fecha_derivacion = models.DateTimeField()
+    fecha_derivacion = models.DateField()
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     asunto = models.IntegerField()
     caratula = models.CharField(max_length=280)
@@ -79,11 +79,11 @@ class Causa(models.Model):
     jurisdiccion = models.ForeignKey(Jurisdiccion, on_delete=models.CASCADE)
     tribunal = models.IntegerField(validators=[MaxValueValidator(100),
                                                MinValueValidator(1)])
-    fecha_inicio_demanda = models.DateTimeField()
+    fecha_inicio_demanda = models.DateField()
     incapacidad_reclamada = models.DecimalField(max_digits=5, decimal_places=2)
     reclama_dano_sicologico = models.BooleanField(default=False)
     monto_demanda = models.DecimalField(max_digits=14, decimal_places=2)
-    fecha_pmi = models.DateTimeField()
+    fecha_pmi = models.DateField()
     porcentaje_srt = models.DecimalField(max_digits=5, decimal_places=2)
     abogado = models.ForeignKey(Abogado, on_delete=models.CASCADE)
     bono_y_jus = models.ForeignKey(BonoJus, on_delete=models.CASCADE)
@@ -99,9 +99,9 @@ class Causa(models.Model):
                                         null=True)
     negociable_pmo = models.BooleanField(default=False)
     negociable_pmp = models.BooleanField(default=False)
-    fecha_pedido_pmp = models.DateTimeField()
-    fecha_asigno_pmp = models.DateTimeField()
-    fecha_pmp = models.DateTimeField()
+    fecha_pedido_pmp = models.DateField()
+    fecha_asigno_pmp = models.DateField()
+    fecha_pmp = models.DateField()
     porcentaje_pmp = models.DecimalField(max_digits=14, decimal_places=2,
                                          default=0)
     monto_autorizado = models.DecimalField(max_digits=14, decimal_places=2)
@@ -109,13 +109,13 @@ class Causa(models.Model):
                                            on_delete=models.CASCADE)
     ofrecimiento = models.DecimalField(max_digits=14, decimal_places=2)
     contra_oferta = models.DecimalField(max_digits=14, decimal_places=2)
-    fecha_ultimo_ofrecimiento = models.DateTimeField()
+    fecha_ultimo_ofrecimiento = models.DateField()
     monto_acuerdo = models.DecimalField(max_digits=14, decimal_places=2)
-    fecha_presentacion_acuerdo = models.DateTimeField()
+    fecha_presentacion_acuerdo = models.DateField()
     hay_cbu = models.BooleanField(default=False)
     homologado = models.BooleanField(default=False)
-    fecha_pedido_fondos = models.DateTimeField()
-    fecha_venci_pago = models.DateTimeField()
+    fecha_pedido_fondos = models.DateField()
+    fecha_venci_pago = models.DateField()
     observacion = models.CharField(max_length=120, blank=True, null=True)
     ppmed = models.CharField(max_length=60, blank=True, null=True)
     ppsic = models.CharField(max_length=60, blank=True, null=True)
@@ -126,7 +126,7 @@ class Causa(models.Model):
     otras_pruebas = models.CharField(max_length=60, blank=True, null=True)
     sentencia = models.CharField(max_length=60, blank=True, null=True)
     pedido_fondos = models.CharField(max_length=60, blank=True, null=True)
-    fecha_facturado = models.DateTimeField()
+    fecha_facturado = models.DateField()
 
     def __str__(self):
         return self.caratula
