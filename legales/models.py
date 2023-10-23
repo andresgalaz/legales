@@ -40,6 +40,12 @@ class Excepcion(models.Model):
         return str(self.id) + ' - ' + self.nombre
 
 
+class Oficio(models.Model):
+    nombre = models.CharField(max_length=20)
+
+    def __str__(self):
+        return str(self.id) + ' - ' + self.nombre
+
 class EstadoProcesal(models.Model):
     nombre = models.CharField(max_length=40)
 
@@ -73,7 +79,7 @@ class Causa(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     asunto = models.IntegerField()
     caratula = models.CharField(max_length=280)
-    cod_17039 = models.CharField(max_length=40)
+    expediente = models.CharField(max_length=40)
     jurisdiccion = models.ForeignKey(Jurisdiccion, on_delete=models.CASCADE)
     tribunal = models.IntegerField(validators=[MaxValueValidator(100),
                                                MinValueValidator(1)])
@@ -118,7 +124,7 @@ class Causa(models.Model):
     ppmed = models.CharField(max_length=60, blank=True, null=True)
     ppsic = models.CharField(max_length=60, blank=True, null=True)
     pcont = models.CharField(max_length=60, blank=True, null=True)
-    oficios = models.CharField(max_length=60, blank=True, null=True)
+    oficios = models.ForeignKey(Oficio, on_delete=models.CASCADE)
     confesional = models.BooleanField(default=False)
     testimonial = models.BooleanField(default=False)
     otras_pruebas = models.CharField(max_length=60, blank=True, null=True)
