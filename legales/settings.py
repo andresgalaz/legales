@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'vs=tzqf)*tn*=%x!_q^nbde4%gf25liav(o$wh&a2e@ks$-bcb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '192.168.3.100', 'localhost',
                  'balegales.compustrom.com']
@@ -82,7 +82,7 @@ DATABASES = {
         'USER': 'agalaz',
         'PASSWORD': 'agalaz',
         'HOST': 'localhost',
-        'PORT': '',        
+        'PORT': '',
     }
 }
 
