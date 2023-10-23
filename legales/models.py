@@ -46,6 +46,7 @@ class Oficio(models.Model):
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
 
+
 class EstadoProcesal(models.Model):
     nombre = models.CharField(max_length=40)
 
