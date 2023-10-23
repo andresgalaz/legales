@@ -91,11 +91,11 @@ class Causa(models.Model):
     jurisdiccion = models.ForeignKey(Jurisdiccion, on_delete=models.CASCADE)
     tribunal = models.IntegerField(validators=[MaxValueValidator(100),
                                                MinValueValidator(1)])
-    tipo_proceso = models.ForeignKey(TipoProceso, models.SET_NULL, blank=True,
-                                     null=True)
+    tipo_proceso = models.ForeignKey(TipoProceso, on_delete=models.CASCADE)
     fecha_inicio_demanda = models.DateField()
     incapacidad_reclamada = models.DecimalField(max_digits=5, decimal_places=2)
-    lesiones_reclamada = models.CharField(max_length=280, blank=True, null=True)
+    lesiones_reclamada = models.CharField(max_length=280, blank=True,
+                                          null=True)
     reclama_dano_sicologico = models.BooleanField(default=False)
     monto_demanda = models.DecimalField(max_digits=14, decimal_places=2)
     fecha_pmi = models.DateField()
