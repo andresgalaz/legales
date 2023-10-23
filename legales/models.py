@@ -124,7 +124,8 @@ class Causa(models.Model):
     ppmed = models.CharField(max_length=60, blank=True, null=True)
     ppsic = models.CharField(max_length=60, blank=True, null=True)
     pcont = models.CharField(max_length=60, blank=True, null=True)
-    oficios = models.ForeignKey(Oficio, on_delete=models.CASCADE)
+    oficios = models.ForeignKey(Oficio, models.SET_NULL, blank=True,
+                                null=True)
     confesional = models.BooleanField(default=False)
     testimonial = models.BooleanField(default=False)
     otras_pruebas = models.CharField(max_length=60, blank=True, null=True)
