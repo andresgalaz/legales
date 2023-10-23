@@ -39,11 +39,13 @@ class Excepcion(models.Model):
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
 
+
 class TipoProceso(models.Model):
     nombre = models.CharField(max_length=50)
 
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
+
 
 class Oficio(models.Model):
     nombre = models.CharField(max_length=20)
@@ -89,7 +91,8 @@ class Causa(models.Model):
     jurisdiccion = models.ForeignKey(Jurisdiccion, on_delete=models.CASCADE)
     tribunal = models.IntegerField(validators=[MaxValueValidator(100),
                                                MinValueValidator(1)])
-    tipo_proceso = models.ForeignKey(TipoProceso, on_delete=models.CASCADE)
+    tipo_proceso = models.ForeignKey(TipoProceso, models.SET_NULL, blank=True,
+                                     null=True)
     fecha_inicio_demanda = models.DateField()
     incapacidad_reclamada = models.DecimalField(max_digits=5, decimal_places=2)
     lesiones_reclamada = models.CharField(max_length=280)
