@@ -95,7 +95,7 @@ class Causa(models.Model):
                                      null=True)
     fecha_inicio_demanda = models.DateField()
     incapacidad_reclamada = models.DecimalField(max_digits=5, decimal_places=2)
-    lesiones_reclamada = models.CharField(max_length=280)
+    lesiones_reclamada = models.CharField(max_length=280, blank=True, null=True)
     reclama_dano_sicologico = models.BooleanField(default=False)
     monto_demanda = models.DecimalField(max_digits=14, decimal_places=2)
     fecha_pmi = models.DateField()
