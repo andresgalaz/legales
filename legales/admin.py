@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models.functions import Lower
 from .models import Company, Jurisdiccion, Abogado, BonoJus, Excepcion, \
                     EstadoProcesal, ObservacionPMP, EstadoNegociacion, \
-                    ObservacionPericia, Causa, Oficio
+                    ObservacionPericia, Causa, Oficio, TipoProceso
 
 
 class AbogadoAdmin(admin.ModelAdmin):
@@ -28,6 +28,7 @@ admin.site.register(Jurisdiccion, SimpleAdmin)
 admin.site.register(Abogado, AbogadoAdmin)
 admin.site.register(BonoJus, SimpleAdmin)
 admin.site.register(Excepcion, SimpleAdmin)
+admin.site.register(TipoProceso, SimpleAdmin)
 admin.site.register(Oficio, SimpleAdmin)
 admin.site.register(EstadoProcesal, SimpleAdmin)
 admin.site.register(ObservacionPMP, SimpleAdmin)
