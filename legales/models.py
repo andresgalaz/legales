@@ -162,4 +162,5 @@ class Vencimiento(models.Model):
                                         on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.fecha) + ' - ' + self.tipoVencimiento + ' - ' + self.causa
+        return str(self.fecha) + ' - ' + self.tipoVencimiento + ' - ' \
+             + self.causa
