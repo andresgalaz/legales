@@ -146,3 +146,17 @@ class Causa(models.Model):
 
     def __str__(self):
         return self.company + ' ' + self.asunto + ' ' + self.caratula
+
+
+class TipoVencimiento(models.Model):
+    nombre = models.CharField(max_length=40)
+
+    def __str__(self):
+        return str(self.id) + ' - ' + self.nombre
+
+
+class Vencimiento(models.Model):
+    fecha = models.DateTimeField()
+    cause = models.ForeignKey(Causa, on_delete=models.CASCADE)
+    tipoVencimiento = models.ForeignKey(TipoVencimiento,
+                                        on_delete=models.CASCADE)

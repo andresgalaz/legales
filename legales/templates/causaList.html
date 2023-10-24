@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% block body %}
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <a href="/admin">Administración</a>
+    </div>
+  </div>
+</div>
+
+<div style="margin: 0 40px 0 40px">
+  <div class="card card-block mt-3">
+    <form action="" method="get" class="form-inline">
+      {% csrf_token %} {% for field in form.visible_fields %}
+      <div class="form-group m-4">{{ field.label_tag }}&nbsp;{{ field }}</div>
+      {% endfor %}
+      <hr class="separator" />
+      <input type="submit" class="btn btn-primary btn-sm float-right" value="Filtrar" style="width: 100px" />
+    </form>
+  </div>
+
+  {% include "paginacion.html" %}
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Compañía</th>
+        <th scope="col">Asunto</th>
+        <th scope="col">Carátula</th>
+        <th scope="col" style="text-align: center">Fecha</th>
+        <th scope="col">Tipo Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for causa in causa_list %}
+      <tr>
+        <th scope="row">{{ page_obj.start_index | add:forloop.counter0 }}</th>
+        <td>{{ causa.company }}</td>
+        <td>{{ causa.asunto }}</td>
+        <td>{{ causa.caratula }}</td>
+        <td>{{ causa.fecha_derivacion|date:'d/m/Y' }}</td>
+        <td>....</td>
+        <!-- <td align="right">{{ activo.cantidad }}</td> -->
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% include "paginacion.html" %}
+</div>
+
+{% endblock %}
