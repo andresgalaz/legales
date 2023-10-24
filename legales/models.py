@@ -157,6 +157,9 @@ class TipoVencimiento(models.Model):
 
 class Vencimiento(models.Model):
     fecha = models.DateTimeField()
-    cause = models.ForeignKey(Causa, on_delete=models.CASCADE)
+    causa = models.ForeignKey(Causa, on_delete=models.CASCADE)
     tipoVencimiento = models.ForeignKey(TipoVencimiento,
                                         on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.fecha) + ' - ' + self.tipoVencimiento + ' - ' + self.causa
