@@ -5,12 +5,18 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class Company(models.Model):
     nombre = models.CharField(max_length=20)
 
+    class Meta:
+        unique_together = [['nombre',]]
+
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
 
 
 class Jurisdiccion(models.Model):
     nombre = models.CharField(max_length=20)
+
+    class Meta:
+        unique_together = [['nombre',]]
 
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
@@ -22,12 +28,18 @@ class Abogado(models.Model):
     telefono1 = models.CharField(max_length=20, blank=True, null=True)
     telefono2 = models.CharField(max_length=20, blank=True, null=True)
 
+    class Meta:
+        unique_together = [['nombre',]]
+
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
 
 
 class BonoJus(models.Model):
     nombre = models.CharField(max_length=20)
+
+    class Meta:
+        unique_together = [['nombre',]]
 
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
@@ -36,12 +48,18 @@ class BonoJus(models.Model):
 class Excepcion(models.Model):
     nombre = models.CharField(max_length=120)
 
+    class Meta:
+        unique_together = [['nombre',]]
+
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
 
 
 class TipoProceso(models.Model):
     nombre = models.CharField(max_length=50)
+
+    class Meta:
+        unique_together = [['nombre',]]
 
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
@@ -50,12 +68,18 @@ class TipoProceso(models.Model):
 class Oficio(models.Model):
     nombre = models.CharField(max_length=20)
 
+    class Meta:
+        unique_together = [['nombre',]]
+
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
 
 
 class EstadoProcesal(models.Model):
     nombre = models.CharField(max_length=40)
+
+    class Meta:
+        unique_together = [['nombre',]]
 
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
@@ -64,6 +88,9 @@ class EstadoProcesal(models.Model):
 class ObservacionPMP(models.Model):
     nombre = models.CharField(max_length=80)
 
+    class Meta:
+        unique_together = [['nombre',]]
+
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
 
@@ -71,12 +98,18 @@ class ObservacionPMP(models.Model):
 class EstadoNegociacion(models.Model):
     nombre = models.CharField(max_length=40)
 
+    class Meta:
+        unique_together = [['nombre',]]
+
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
 
 
 class ObservacionPericia(models.Model):
     nombre = models.CharField(max_length=80)
+
+    class Meta:
+        unique_together = [['nombre',]]
 
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
@@ -113,35 +146,42 @@ class Causa(models.Model):
     fecha_asigno_pmp = models.DateField()
     fecha_pmp = models.DateField()
     porcentaje_pmp = models.DecimalField(max_digits=14, decimal_places=2, default=0)
-    monto_autorizado = models.DecimalField(max_digits=14, decimal_places=2)
+    monto_autorizado = models.DecimalField(max_digits=14, decimal_places=2, null=True)
     estado_negociacion = models.ForeignKey(EstadoNegociacion, on_delete=models.CASCADE)
-    ofrecimiento = models.DecimalField(max_digits=14, decimal_places=2)
-    contra_oferta = models.DecimalField(max_digits=14, decimal_places=2)
-    fecha_ultimo_ofrecimiento = models.DateField()
-    monto_acuerdo = models.DecimalField(max_digits=14, decimal_places=2)
-    fecha_presentacion_acuerdo = models.DateField()
-    hay_cbu = models.BooleanField(default=False)
-    homologado = models.BooleanField(default=False)
-    fecha_pedido_fondos = models.DateField()
-    fecha_venci_pago = models.DateField()
+    ofrecimiento = models.DecimalField(max_digits=14, decimal_places=2, null=True)
+    contra_oferta = models.DecimalField(max_digits=14, decimal_places=2, null=True)
+    fecha_ultimo_ofrecimiento = models.DateField(null=True)
+    monto_acuerdo = models.DecimalField(max_digits=14, decimal_places=2, null=True)
+    fecha_presentacion_acuerdo = models.DateField(null=True)
+    hay_cbu = models.BooleanField(default=False, null=True)
+    homologado = models.BooleanField(default=False, null=True)
+    fecha_pedido_fondos = models.DateField(null=True)
+    fecha_venci_pago = models.DateField(null=True)
     observacion = models.CharField(max_length=120, blank=True, null=True)
     ppmed = models.CharField(max_length=60, blank=True, null=True)
     ppsic = models.CharField(max_length=60, blank=True, null=True)
     pcont = models.CharField(max_length=60, blank=True, null=True)
     oficios = models.ForeignKey(Oficio, models.SET_NULL, blank=True, null=True)
-    confesional = models.BooleanField(default=False)
-    testimonial = models.BooleanField(default=False)
+    confesional = models.BooleanField(default=False, null=True)
+    testimonial = models.BooleanField(default=False, null=True)
     otras_pruebas = models.CharField(max_length=60, blank=True, null=True)
     sentencia = models.CharField(max_length=60, blank=True, null=True)
     pedido_fondos = models.CharField(max_length=60, blank=True, null=True)
-    fecha_facturado = models.DateField()
+    fecha_facturado = models.DateField(null=True)
+
+    class Meta:
+        unique_together = [['asunto',]]
+
 
     def __str__(self):
-        return self.company + ' ' + self.asunto + ' ' + self.caratula
+        return self.company.nombre + ' ' + self.asunto + ' ' + self.caratula
 
 
 class TipoVencimiento(models.Model):
     nombre = models.CharField(max_length=40)
+
+    class Meta:
+        unique_together = [['nombre',]]
 
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
@@ -152,6 +192,9 @@ class Vencimiento(models.Model):
     causa = models.ForeignKey(Causa, on_delete=models.CASCADE)
     tipoVencimiento = models.ForeignKey(TipoVencimiento,
                                         on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = [['fecha', 'causa', 'tipoVencimiento']]
 
     def __str__(self):
         return str(self.fecha) + ' - ' + self.tipoVencimiento + ' - ' \

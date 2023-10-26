@@ -199,7 +199,11 @@ class Command(BaseCommand):
                     fechaPmp = str2date(csvFechaPmp)
                     porcentajePmp = str2number(csvPorcentajePmp)
                     montoAutorizado = str2number(csvMontoAutorizado)
-                    estadoNegociacion = EstadoNegociacion.objects.all().get(nombre=csvEstadoNegociacion)
+                    try:
+                        estadoNegociacion = EstadoNegociacion.objects.all().get(nombre=csvEstadoNegociacion)
+                    except Excepcion:
+                        estadoNegociacion = None
+                        print("No existe exccepción (" + nlinea +") :"+csvEstadoNegociacion)
                     ofrecimiento = str2number(csvOfrecimiento)
                     contraOferta = str2number(csvContraOferta)
                     fechaUltimoOfrecimiento = str2date(csvFechaUltimoOfrecimiento)
