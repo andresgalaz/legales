@@ -72,7 +72,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         start_time = timezone.now()
         file_path = options["file_path"]
-        nLinea = 0
+        nLinea = 1
         nError = 0
 
         # encoding = 'cp437'
@@ -81,7 +81,7 @@ class Command(BaseCommand):
             # Valida. Si hay errores no procesa nada
             for nPasada in range(0, 2, 1):
                 print('Pasada:', nPasada)
-                nLinea = 0
+                nLinea = 1
                 for row in data:  # data[1:]:
                     nLinea += 1
                     if isRowEmpty(row):
