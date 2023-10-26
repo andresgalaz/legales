@@ -95,7 +95,7 @@ class Causa(models.Model):
     incapacidad_reclamada = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     lesiones_reclamada = models.CharField(max_length=280, blank=True, null=True)
     reclama_dano_sicologico = models.BooleanField(default=False)
-    monto_demanda = models.DecimalField(max_digits=14, decimal_places=2)
+    monto_demanda = models.DecimalField(max_digits=14, decimal_places=2, null=True)
     fecha_pmi = models.DateField()
     porcentaje_srt = models.DecimalField(max_digits=5, decimal_places=2)
     abogado = models.ForeignKey(Abogado, on_delete=models.CASCADE)
