@@ -114,13 +114,14 @@ class Causa(models.Model):
                                         null=True)
     negociable_pmo = models.BooleanField(default=False)
     negociable_pmp = models.BooleanField(default=False)
+    observacion_pericia = models.CharField(max_length=120, blank=True, null=True)
     fecha_pedido_pmp = models.DateField()
     fecha_asigno_pmp = models.DateField()
     fecha_pmp = models.DateField()
     porcentaje_pmp = models.DecimalField(max_digits=14, decimal_places=2,
                                          default=0)
     monto_autorizado = models.DecimalField(max_digits=14, decimal_places=2)
-    esatdo_negociacion = models.ForeignKey(EstadoNegociacion,
+    estado_negociacion = models.ForeignKey(EstadoNegociacion,
                                            on_delete=models.CASCADE)
     ofrecimiento = models.DecimalField(max_digits=14, decimal_places=2)
     contra_oferta = models.DecimalField(max_digits=14, decimal_places=2)
