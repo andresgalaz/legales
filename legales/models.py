@@ -25,7 +25,7 @@ class Jurisdiccion(models.Model):
 class Abogado(models.Model):
     nombre = models.CharField(max_length=120)
     correo = models.CharField(max_length=120, blank=True, null=True)
-    telefono1 = models.CharField(max_length=20, blank=True, null=True)
+    telefono1 = models.CharField(max_length=120, blank=True, null=True)
     telefono2 = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
