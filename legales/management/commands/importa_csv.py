@@ -45,7 +45,9 @@ def str2boolean(cBol):
 
 
 def str2number(cNum):
-    cNum = cNum.strip().replace(".", "")
+    if cNum.endswith("%"):
+        print(cNum)
+    cNum = cNum.strip().replace(".", "").replace("\xa0%", "")
     try:
         if cNum.find(',') >= 0:
             cNum = cNum.replace(",", ".")
