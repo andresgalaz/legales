@@ -171,9 +171,8 @@ class Command(BaseCommand):
                     try:
                         abogado = Abogado.objects.all().get(nombre=csvAbogado)
                     except Exception:
-                        abogado = None
-                        print( nLinea, "No existe abogado:"+csvAbogado)
-                        return
+                        nError += 1
+                        print(nLinea, "No existe abogado:"+csvAbogado)
                     bonoJus = BonoJus.objects.all().get(nombre=csvBonoYJus)
                     if not bonoJus:
                         nError += 1
@@ -189,7 +188,11 @@ class Command(BaseCommand):
                     estadoProcesal = str2number(csvEstadoProcesal)
                     negociablePmo = str2boolean(csvNegociablePmo)
                     negociablePmp = str2boolean(csvNegociablePmp)
-                    estadoProcesal = EstadoProcesal.objects.all().get(nombre=csvEstadoProcesal)
+                    try:
+                        estadoProcesal = EstadoProcesal.objects.all().get(nombre=csvEstadoProcesal)
+                    except Exception:
+                        nError += 1
+                        print(nLinea, "No existe Estado Procesal:"+csvEstadoProcesal)
                     observacionPericia = csvObservacionPericia
                     fechaPedidoPmp = str2date(csvFechaPedidoPmp)
                     fechaAsignoPmp = str2date(csvFechaAsignoPmp)
@@ -218,6 +221,12 @@ class Command(BaseCommand):
                     pedidoFondos = csvPedidoFondos
                     fechaFacturado = str2date(csvFechaFacturado)
                     # Si es la pasada 1, ya está validado y no hay errores, asi es que se procesa
+
+                    if nLinea % 100 == 0:
+                        print('Procesando [', nPasada, ']:', nLinea)
+                    if nPasada == 0:
+                        continue
+
                     try:
                         causa = Causa.objects.create(
                             fecha_derivacion=fechaDerivacion,
