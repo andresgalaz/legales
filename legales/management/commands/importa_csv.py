@@ -168,13 +168,12 @@ class Command(BaseCommand):
                     montoDemanda = str2number(csvMontoDemanda)
                     fechaPmi = str2date(csvFechaPmi)
                     porcentajeSrt = str2number(csvPorcentajeSrt)
-                    abogado = Abogado.objects.all().get(nombre=csvAbogado)
-                    if not abogado:
-                        nError += 1
-                        print(
-                            nLinea, 'No existe Abogado en la tabla:' + csvAbogado,
-                            row)
-                        continue
+                    try:
+                        abogado = Abogado.objects.all().get(nombre=csvAbogado)
+                    except Exception:
+                        abogado = None
+                        print( nLinea, "No existe abogado:"+csvAbogado)
+                        return
                     bonoJus = BonoJus.objects.all().get(nombre=csvBonoYJus)
                     if not bonoJus:
                         nError += 1
