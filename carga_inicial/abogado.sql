@@ -1,3 +1,5 @@
+-- Excel
+-- ="insert into legales_abogado  (nombre,correo,telefono1,telefono2) values('"&A2&"','"&C2&"','"&D2&"','"&E2&"');"
 insert into legales_abogado  (nombre,correo,telefono1,telefono2) values('CARLA JAUREGUI','jaureguicarla@outlook.com','1530705757','4371-1007');
 insert into legales_abogado  (nombre,correo,telefono1,telefono2) values('PAOLA VERÓNICA BLANCO STILE','dra_blancostile@yahoo.com.ar','1551759779','');
 insert into legales_abogado  (nombre,correo,telefono1,telefono2) values('MARIA DUBRA','mariadubra@hotmail.com','','');
