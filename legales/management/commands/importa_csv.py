@@ -190,7 +190,11 @@ class Command(BaseCommand):
                             print(nLinea, "No existe Bono y Jus:"+csvBonoYJus)
                     montoJus = str2number(csvMontoJus)
                     montoBono = str2number(csvMontoBono)
-                    excepcion = None if csvExcepcion == '' else Excepcion.objects.all().get(nombre=csvExcepcion)
+                    try:
+                        excepcion = None if csvExcepcion == '' else Excepcion.objects.all().get(nombre=csvExcepcion)
+                    except Exception:
+                        nError += 1
+                        print(nLinea, "No existe Excepcion:"+csvExcepcion)
                     detalle = csvDetalle
                     preexistencia = str2number(csvPreexistencia)
                     estadoProcesal = str2number(csvEstadoProcesal)
