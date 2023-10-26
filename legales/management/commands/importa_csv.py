@@ -231,8 +231,8 @@ class Command(BaseCommand):
                     fechaFacturado = str2date(csvFechaFacturado)
                     # Si es la pasada 1, ya está validado y no hay errores, asi es que se procesa
 
-                    if nLinea % 100 == 0:
-                        print('Procesando [', nPasada, ']:', nLinea)
+                    # if nLinea % 100 == 0:
+                    #     print('Procesando [', nPasada, ']:', nLinea)
                     if nPasada == 0:
                         continue
 
