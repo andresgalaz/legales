@@ -148,19 +148,27 @@ class Command(BaseCommand):
                     # 58 Ahorro en % incapacidad;
 
                     fechaDerivacion = str2date(csvFechaDerivacion)
-                    company = Company.objects.all().get(nombre=csvCompany)
+                    try:
+                        company = Company.objects.all().get(nombre=csvCompany)
+                    except Exception:
+                        nError += 1
+                        print(nLinea, "No existe Company:"+csvCompany)
                     asunto = csvAsunto
                     caratula = csvCaratula
                     expediente = csvExpediente
-                    jurisdiccion = Jurisdiccion.objects.all().get(nombre=csvJurisdiccion)
-                    tribunal = str2number(csvTribunal)
-                    tipoProceso = TipoProceso.objects.all().get(nombre=csvTipoProceso)
-                    if not tipoProceso:
+                    try:
+                        jurisdiccion = Jurisdiccion.objects.all().get(nombre=csvJurisdiccion)
+                    except Exception:
                         nError += 1
-                        print(
-                            nLinea, 'No existe Tipo Proceso en la tabla:' + csvTipoProceso,
-                            row)
-                        continue
+                        print(nLinea, "No existe Jurisdiccion:"+csvJurisdiccion)
+                    tribunal = str2number(csvTribunal)
+                    try:
+                        tipoProceso = TipoProceso.objects.all().get(nombre=csvTipoProceso)
+                    except Exception:
+                        tipoProceso = None
+                        if csvTipoProceso != '':
+                            nError += 1
+                            print(nLinea, "No existe Tipo de Proceso:"+csvTipoProceso)
                     fechaInicioDemanda = str2date(csvFechaInicioDemanda)
                     incapacidadReclamada = str2number(csvIncapacidadReclamada)
                     lesionesReclamada = csvLesionesReclamada
@@ -171,15 +179,15 @@ class Command(BaseCommand):
                     try:
                         abogado = Abogado.objects.all().get(nombre=csvAbogado)
                     except Exception:
-                        nError += 1
-                        print(nLinea, "No existe abogado:"+csvAbogado)
-                    bonoJus = BonoJus.objects.all().get(nombre=csvBonoYJus)
-                    if not bonoJus:
-                        nError += 1
-                        print(
-                            nLinea, 'No existe Abogado en la tabla:' + csvBonoYJus,
-                            row)
-                        continue
+                        if csvAbogado != '':
+                            nError += 1
+                            print(nLinea, "No existe abogado:"+csvAbogado)
+                    try:
+                        bonoJus = BonoJus.objects.all().get(nombre=csvBonoYJus)
+                    except Exception:
+                        if csvBonoYJus != '':
+                            nError += 1
+                            print(nLinea, "No existe Bono y Jus:"+csvBonoYJus)
                     montoJus = str2number(csvMontoJus)
                     montoBono = str2number(csvMontoBono)
                     excepcion = None if csvExcepcion == '' else Excepcion.objects.all().get(nombre=csvExcepcion)
@@ -191,8 +199,9 @@ class Command(BaseCommand):
                     try:
                         estadoProcesal = EstadoProcesal.objects.all().get(nombre=csvEstadoProcesal)
                     except Exception:
-                        nError += 1
-                        print(nLinea, "No existe Estado Procesal:"+csvEstadoProcesal)
+                        if csvEstadoProcesal != '':
+                            nError += 1
+                            print(nLinea, "No existe Estado Procesal:"+csvEstadoProcesal)
                     observacionPericia = csvObservacionPericia
                     fechaPedidoPmp = str2date(csvFechaPedidoPmp)
                     fechaAsignoPmp = str2date(csvFechaAsignoPmp)
