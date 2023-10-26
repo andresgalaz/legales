@@ -45,8 +45,6 @@ def str2boolean(cBol):
 
 
 def str2number(cNum):
-    if cNum.endswith("%"):
-        print(cNum)
     cNum = cNum.strip().replace(".", "").replace("\xa0%", "")
     try:
         if cNum.find(',') >= 0:
@@ -199,11 +197,7 @@ class Command(BaseCommand):
                     fechaPmp = str2date(csvFechaPmp)
                     porcentajePmp = str2number(csvPorcentajePmp)
                     montoAutorizado = str2number(csvMontoAutorizado)
-                    try:
-                        estadoNegociacion = EstadoNegociacion.objects.all().get(nombre=csvEstadoNegociacion)
-                    except Excepcion:
-                        estadoNegociacion = None
-                        print("No existe exccepción (" + nlinea +") :"+csvEstadoNegociacion)
+                    estadoNegociacion = None if csvEstadoNegociacion == '' else EstadoNegociacion.objects.all().get(nombre=csvEstadoNegociacion)
                     ofrecimiento = str2number(csvOfrecimiento)
                     contraOferta = str2number(csvContraOferta)
                     fechaUltimoOfrecimiento = str2date(csvFechaUltimoOfrecimiento)
