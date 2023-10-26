@@ -104,7 +104,7 @@ class Causa(models.Model):
     monto_bono = models.DecimalField(max_digits=14, decimal_places=2, null=True)
     excepcion = models.ForeignKey(Excepcion, models.SET_NULL, blank=True, null=True)
     detalle = models.CharField(max_length=280, blank=True, null=True)
-    preexistencia = models.DecimalField(max_digits=14, decimal_places=2, default=0)
+    preexistencia = models.DecimalField(max_digits=14, decimal_places=2, default=0, null=True)
     estado_procesal = models.ForeignKey(EstadoProcesal, models.SET_NULL, blank=True, null=True)
     negociable_pmo = models.BooleanField(default=False)
     negociable_pmp = models.BooleanField(default=False)
