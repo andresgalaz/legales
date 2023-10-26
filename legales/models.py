@@ -172,9 +172,8 @@ class Causa(models.Model):
     class Meta:
         unique_together = [['asunto',]]
 
-
     def __str__(self):
-        return self.company.nombre + ' ' + self.asunto + ' ' + self.caratula
+        return self.company.nombre + ' ' + str(self.asunto) + ' ' + self.caratula
 
 
 class TipoVencimiento(models.Model):
