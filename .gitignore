@@ -5,3 +5,4 @@ legales/migrations/
 **.pyc
 static/
 **~
+.~*#

@@ -89,13 +89,11 @@ class Causa(models.Model):
     caratula = models.CharField(max_length=280)
     expediente = models.CharField(max_length=40)
     jurisdiccion = models.ForeignKey(Jurisdiccion, on_delete=models.CASCADE)
-    tribunal = models.IntegerField(validators=[MaxValueValidator(100),
-                                               MinValueValidator(1)])
+    tribunal = models.IntegerField(validators=[MaxValueValidator(100), MinValueValidator(1)])
     tipo_proceso = models.ForeignKey(TipoProceso, on_delete=models.CASCADE)
     fecha_inicio_demanda = models.DateField()
-    incapacidad_reclamada = models.DecimalField(max_digits=5, decimal_places=2)
-    lesiones_reclamada = models.CharField(max_length=280, blank=True,
-                                          null=True)
+    incapacidad_reclamada = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    lesiones_reclamada = models.CharField(max_length=280, blank=True, null=True)
     reclama_dano_sicologico = models.BooleanField(default=False)
     monto_demanda = models.DecimalField(max_digits=14, decimal_places=2)
     fecha_pmi = models.DateField()
@@ -104,25 +102,19 @@ class Causa(models.Model):
     bono_y_jus = models.ForeignKey(BonoJus, on_delete=models.CASCADE)
     monto_jus = models.DecimalField(max_digits=14, decimal_places=2)
     monto_bono = models.DecimalField(max_digits=14, decimal_places=2)
-    excepcion = models.ForeignKey(Excepcion, models.SET_NULL, blank=True,
-                                  null=True)
+    excepcion = models.ForeignKey(Excepcion, models.SET_NULL, blank=True, null=True)
     detalle = models.CharField(max_length=280, blank=True, null=True)
-    preexistencia = models.DecimalField(max_digits=14, decimal_places=2,
-                                        default=0)
-    estado_procesal = models.ForeignKey(EstadoProcesal,
-                                        models.SET_NULL, blank=True,
-                                        null=True)
+    preexistencia = models.DecimalField(max_digits=14, decimal_places=2, default=0)
+    estado_procesal = models.ForeignKey(EstadoProcesal, models.SET_NULL, blank=True, null=True)
     negociable_pmo = models.BooleanField(default=False)
     negociable_pmp = models.BooleanField(default=False)
     observacion_pericia = models.CharField(max_length=120, blank=True, null=True)
     fecha_pedido_pmp = models.DateField()
     fecha_asigno_pmp = models.DateField()
     fecha_pmp = models.DateField()
-    porcentaje_pmp = models.DecimalField(max_digits=14, decimal_places=2,
-                                         default=0)
+    porcentaje_pmp = models.DecimalField(max_digits=14, decimal_places=2, default=0)
     monto_autorizado = models.DecimalField(max_digits=14, decimal_places=2)
-    estado_negociacion = models.ForeignKey(EstadoNegociacion,
-                                           on_delete=models.CASCADE)
+    estado_negociacion = models.ForeignKey(EstadoNegociacion, on_delete=models.CASCADE)
     ofrecimiento = models.DecimalField(max_digits=14, decimal_places=2)
     contra_oferta = models.DecimalField(max_digits=14, decimal_places=2)
     fecha_ultimo_ofrecimiento = models.DateField()
@@ -136,8 +128,7 @@ class Causa(models.Model):
     ppmed = models.CharField(max_length=60, blank=True, null=True)
     ppsic = models.CharField(max_length=60, blank=True, null=True)
     pcont = models.CharField(max_length=60, blank=True, null=True)
-    oficios = models.ForeignKey(Oficio, models.SET_NULL, blank=True,
-                                null=True)
+    oficios = models.ForeignKey(Oficio, models.SET_NULL, blank=True, null=True)
     confesional = models.BooleanField(default=False)
     testimonial = models.BooleanField(default=False)
     otras_pruebas = models.CharField(max_length=60, blank=True, null=True)
