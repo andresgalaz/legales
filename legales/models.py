@@ -45,16 +45,6 @@ class BonoJus(models.Model):
         return str(self.id) + ' - ' + self.nombre
 
 
-class Excepcion(models.Model):
-    nombre = models.CharField(max_length=120)
-
-    class Meta:
-        unique_together = [['nombre',]]
-
-    def __str__(self):
-        return str(self.id) + ' - ' + self.nombre
-
-
 class TipoProceso(models.Model):
     nombre = models.CharField(max_length=50)
 
@@ -202,6 +192,7 @@ class Vencimiento(models.Model):
     def __str__(self):
         return str(self.fecha) + ' - ' + self.tipoVencimiento + ' - ' + self.causa
 
+
 class Excepcion(models.Model):
     nombre = models.CharField(max_length=120)
 
@@ -210,6 +201,7 @@ class Excepcion(models.Model):
 
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
+
 
 class ExcepcionCausa(models.Model):
     causa = models.ForeignKey(Causa, on_delete=models.CASCADE)
