@@ -22,13 +22,16 @@ class SimpleAdmin(admin.ModelAdmin):
         return [Lower('nombre')]
 
 
-# admin.site.register(ExcepcionCausa, admin.TabularInline)
+class VencimientoInline(admin.TabularInline):
+    model = Vencimiento
+
+
 class ExcepcionCausaInline(admin.TabularInline):
     model = ExcepcionCausa
 
 
 class CausaAdmin(admin.ModelAdmin):
-    inlines = [ ExcepcionCausaInline, ]
+    inlines = [VencimientoInline, ExcepcionCausaInline, ]
 
 
 admin.site.site_header = 'B&A Consultores'
@@ -46,4 +49,3 @@ admin.site.register(ObservacionPMP, SimpleAdmin)
 admin.site.register(Oficio, SimpleAdmin)
 admin.site.register(TipoProceso, SimpleAdmin)
 admin.site.register(TipoVencimiento, SimpleAdmin)
-admin.site.register(Vencimiento, admin.ModelAdmin)
