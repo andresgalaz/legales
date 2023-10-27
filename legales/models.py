@@ -185,7 +185,7 @@ class Vencimiento(models.Model):
         unique_together = [['fecha', 'causa', 'tipoVencimiento']]
 
     def __str__(self):
-        return str(self.fecha) + ' - ' + self.tipoVencimiento + ' - ' + self.causa
+        return str(self.id)
 
 
 class Excepcion(models.Model):
@@ -206,4 +206,4 @@ class ExcepcionCausa(models.Model):
         unique_together = [['causa', 'excepcion',]]
 
     def __str__(self):
-        return str(self.causa) + ' - ' + str(self.excepcion)
+        return str(self.id)
