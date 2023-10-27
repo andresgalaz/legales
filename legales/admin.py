@@ -22,20 +22,28 @@ class SimpleAdmin(admin.ModelAdmin):
         return [Lower('nombre')]
 
 
+# admin.site.register(ExcepcionCausa, admin.TabularInline)
+class ExcepcionCausaInline(admin.TabularInline):
+    model = ExcepcionCausa
+
+
+class CausaAdmin(admin.ModelAdmin):
+    inlines = [ ExcepcionCausaInline, ]
+
+
 admin.site.site_header = 'B&A Consultores'
 admin.site.site_title = 'Legales'
-admin.site.register(Company, SimpleAdmin)
-admin.site.register(Jurisdiccion, SimpleAdmin)
 admin.site.register(Abogado, AbogadoAdmin)
 admin.site.register(BonoJus, SimpleAdmin)
-admin.site.register(Excepcion, SimpleAdmin)
-admin.site.register(TipoProceso, SimpleAdmin)
-admin.site.register(Oficio, SimpleAdmin)
-admin.site.register(EstadoProcesal, SimpleAdmin)
-admin.site.register(ObservacionPMP, SimpleAdmin)
+admin.site.register(Causa, CausaAdmin)
+admin.site.register(Company, SimpleAdmin)
 admin.site.register(EstadoNegociacion, SimpleAdmin)
+admin.site.register(EstadoProcesal, SimpleAdmin)
+admin.site.register(Excepcion, SimpleAdmin)
+admin.site.register(Jurisdiccion, SimpleAdmin)
 admin.site.register(ObservacionPericia, SimpleAdmin)
+admin.site.register(ObservacionPMP, SimpleAdmin)
+admin.site.register(Oficio, SimpleAdmin)
+admin.site.register(TipoProceso, SimpleAdmin)
 admin.site.register(TipoVencimiento, SimpleAdmin)
-admin.site.register(Causa, admin.ModelAdmin)
 admin.site.register(Vencimiento, admin.ModelAdmin)
-admin.site.register(ExcepcionCausa, admin.ModelAdmin)

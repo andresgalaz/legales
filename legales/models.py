@@ -125,11 +125,6 @@ class Causa(models.Model):
     bono_y_jus = models.ForeignKey(BonoJus, on_delete=models.CASCADE)
     monto_jus = models.DecimalField(max_digits=14, decimal_places=2, null=True)
     monto_bono = models.DecimalField(max_digits=14, decimal_places=2, null=True)
-    # excepcion_1 = models.ForeignKey(Excepcion, models.SET_NULL, blank=True, null=True)
-    # excepcion_2 = models.ForeignKey(Excepcion, models.SET_NULL, blank=True, null=True)
-    # excepcion_3 = models.ForeignKey(Excepcion, models.SET_NULL, blank=True, null=True)
-    # excepcion_4 = models.ForeignKey(Excepcion, models.SET_NULL, blank=True, null=True)
-    # excepcion_5 = models.ForeignKey(Excepcion, models.SET_NULL, blank=True, null=True)
     detalle = models.CharField(max_length=280, blank=True, null=True)
     preexistencia = models.DecimalField(max_digits=14, decimal_places=2, default=0, null=True)
     estado_procesal = models.ForeignKey(EstadoProcesal, models.SET_NULL, blank=True, null=True)
@@ -211,4 +206,4 @@ class ExcepcionCausa(models.Model):
         unique_together = [['causa', 'excepcion',]]
 
     def __str__(self):
-        return self.causa + ' - ' + self.excepcion 
+        return self.causa + ' - ' + self.excepcion
