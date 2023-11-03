@@ -111,14 +111,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'es-es'
-
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
-
 USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
+USE_L10N = False
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -128,3 +124,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+DATE_INPUT_FORMATS = ['%d/%m/%Y']
+DATE_FORMAT = '%d/%m/%Y'

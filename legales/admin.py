@@ -31,6 +31,7 @@ class ExcepcionCausaInline(admin.TabularInline):
 
 
 class CausaAdmin(admin.ModelAdmin):
+    search_fields = ('asunto', 'caratula',)
     inlines = [VencimientoInline, ExcepcionCausaInline, ]
 
 

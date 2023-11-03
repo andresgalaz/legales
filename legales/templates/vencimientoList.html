@@ -32,14 +32,14 @@
       </tr>
     </thead>
     <tbody>
-      {% for causa in causa_list %}
+      {% for v in vencimiento_list %}
       <tr>
-        <th scope="row">{{ page_obj.start_index | add:forloop.counter0 }}</th>
-        <td>{{ causa.company }}</td>
-        <td>{{ causa.asunto }}</td>
-        <td>{{ causa.caratula }}</td>
-        <td>{{ causa.fecha_derivacion|date:'d/m/Y' }}</td>
-        <td>....</td>
+        <td scope="row">{{ page_obj.start_index | add:forloop.counter0 }}</td>
+        <td>{{ v.causa.company.nombre }}</td>
+        <td>{{ v.causa.asunto }}</td>
+        <td>{{ v.causa.caratula }}</td>
+        <td>{{ v.fecha|date:'d/m/Y' }}</td>
+        <td>{{ v.tipoVencimiento.nombre }}</td>
         <!-- <td align="right">{{ activo.cantidad }}</td> -->
       </tr>
       {% endfor %}
