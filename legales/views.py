@@ -39,10 +39,10 @@ class HomeView(FormMixin, ListView):
     def querysetWrap(self, prmFecInicio, prmFecFinal):
         # prepare filters to apply to queryset
         filters = {}
-        prmFecInicio = parse(prmFecInicio)
+        # prmFecInicio = parse(prmFecInicio)
         if prmFecInicio:
             filters['fecha__gte'] = prmFecInicio
-        prmFecFinal = parse(prmFecFinal)
+        # prmFecFinal = parse(prmFecFinal)
         if prmFecFinal:
             filters['fecha__lte'] = prmFecFinal
 
