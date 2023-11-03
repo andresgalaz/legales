@@ -3,7 +3,6 @@ from django.db.models import Q
 from django.views.generic.edit import FormMixin
 from django.views.generic.list import ListView
 from dateutil.relativedelta import relativedelta
-from dateutil.parser import parse
 import datetime
 
 from .models import Vencimiento
@@ -17,9 +16,9 @@ class HomeFilterForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['fecInicio'].initial = datetime.date.today()
+        self.fields['fecInicio'].initial = datetime.date.today() - relativedelta(days=1)
         self.fields['fecInicio'].widget.attrs['value'] = self.fields['fecInicio'].initial
-        self.fields['fecFinal'].initial = datetime.date.today() + relativedelta(days=5)
+        self.fields['fecFinal'].initial = datetime.date.today() + relativedelta(days=7)
         self.fields['fecFinal'].widget.attrs['value'] = self.fields['fecFinal'].initial
 
 
@@ -39,12 +38,14 @@ class HomeView(FormMixin, ListView):
     def querysetWrap(self, prmFecInicio, prmFecFinal):
         # prepare filters to apply to queryset
         filters = {}
-        # prmFecInicio = parse(prmFecInicio)
         if prmFecInicio:
             filters['fecha__gte'] = prmFecInicio
-        # prmFecFinal = parse(prmFecFinal)
+        else:
+            filters['fecha__gte'] = datetime.date.today() - relativedelta(days=1)
         if prmFecFinal:
             filters['fecha__lte'] = prmFecFinal
+        else:
+            filters['fecha__lte'] = datetime.date.today() + relativedelta(days=7)
 
         if len(filters) == 0:
             # Genera una salida vacía, se debe seleccionar planta
