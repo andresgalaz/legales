@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from dateutil.relativedelta import relativedelta
 import datetime
 
-from .models import Vencimiento
+from .models import Vencimiento, TipoVencimiento
 
 
 class HomeFilterForm(forms.Form):
@@ -13,6 +13,7 @@ class HomeFilterForm(forms.Form):
                                 widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
     fecFinal = forms.DateField(label='Fecha Final', required=True,
                                widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
+    tipoVenc = forms.ModelChoiceField(label='Tipo Vencimiento', queryset=TipoVencimiento.objects.all())
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -35,7 +36,7 @@ class HomeView(FormMixin, ListView):
         context['form'] = HomeFilterForm(self.request.GET)
         return context
 
-    def querysetWrap(self, prmFecInicio, prmFecFinal):
+    def querysetWrap(self, prmFecInicio, prmFecFinal, prmTpVenc):
         # prepare filters to apply to queryset
         filters = {}
         if prmFecInicio:
@@ -46,6 +47,8 @@ class HomeView(FormMixin, ListView):
             filters['fecha__lte'] = prmFecFinal
         else:
             filters['fecha__lte'] = datetime.date.today() + relativedelta(days=7)
+        if prmTpVenc:
+            filters['tipoVencimiento'] = prmTpVenc
 
         if len(filters) == 0:
             # Genera una salida vacía, se debe seleccionar planta
@@ -56,4 +59,5 @@ class HomeView(FormMixin, ListView):
 
     def get_queryset(self):
         return self.querysetWrap(self.request.GET.get('fecInicio'),
-                                 self.request.GET.get('fecFinal'))
+                                 self.request.GET.get('fecFinal'),
+                                 self.request.GET.get('tipoVenc'))
