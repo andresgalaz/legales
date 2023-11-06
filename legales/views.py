@@ -13,7 +13,9 @@ class HomeFilterForm(forms.Form):
                                 widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
     fecFinal = forms.DateField(label='Fecha Final', required=True,
                                widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
-    tipoVenc = forms.ModelChoiceField(label='Tipo Vencimiento', queryset=TipoVencimiento.objects.all())
+    tipoVenc = forms.ModelChoiceField(label='Tipo Vencimiento',
+                                      queryset=TipoVencimiento.objects.all(),
+                                      required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
