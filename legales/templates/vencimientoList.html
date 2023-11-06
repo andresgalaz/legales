@@ -1,5 +1,4 @@
 {% extends 'base.html' %} {% block body %}
-
 <div class="container">
   <div class="row">
     <div class="col text-center">
@@ -33,7 +32,7 @@
     </thead>
     <tbody>
       {% for v in vencimiento_list %}
-      <tr>
+      <tr id="{% url 'admin:legales_causa_change' v.causa.id %}">
         <td scope="row">{{ page_obj.start_index | add:forloop.counter0 }}</td>
         <td>{{ v.causa.company.nombre }}</td>
         <td>{{ v.causa.asunto }}</td>
@@ -48,4 +47,11 @@
   {% include "paginacion.html" %}
 </div>
 
+{% endblock %} {% block script %}
+<script>
+  $("tr").dblclick(function () {
+    var url = $(this).attr("id") + "?_to_field=id&_popup=1";
+    window.open(url, "popup_edit", "width=1200,height=900");
+  });
+</script>
 {% endblock %}
