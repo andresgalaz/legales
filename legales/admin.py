@@ -33,7 +33,7 @@ class ExcepcionCausaInline(admin.TabularInline):
 class CausaAdmin(admin.ModelAdmin):
     list_display = ('company', 'asunto', 'caratula', 'estado_procesal', 'estado_negociacion')
     search_fields = ('asunto', 'caratula')
-    list_filter = ('estado_procesal', 'estado_negociacion')
+    list_filter = ('estado_procesal', 'estado_negociacion', )
     inlines = [VencimientoInline, ExcepcionCausaInline, ]
 
 
