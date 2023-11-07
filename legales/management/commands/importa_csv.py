@@ -13,7 +13,7 @@ from django.utils import timezone
 from django.db.utils import DataError
 from django.db import transaction
 from legales.models import Company, Jurisdiccion, TipoProceso, Abogado, BonoJus, Excepcion, \
-                           EstadoProcesal, EstadoNegociacion, Oficio, Causa
+                           EstadoProcesal, EstadoNegociacion, Oficio, Causa, ExcepcionCausa
 
 
 def str2date(cFecha):
@@ -79,7 +79,7 @@ class Command(BaseCommand):
         with open(file_path, "r", encoding='utf8') as csv_file:
             data = list(csv.reader(csv_file, delimiter=";"))
             # Valida. Si hay errores no procesa nada
-            for nPasada in range(0, 2, 1):
+            for nPasada in range(0, 1, 2):
                 print('Pasada:', nPasada)
                 nLinea = 1
                 for row in data:  # data[1:]:
@@ -190,11 +190,19 @@ class Command(BaseCommand):
                             print(nLinea, "No existe Bono y Jus:"+csvBonoYJus)
                     montoJus = str2number(csvMontoJus)
                     montoBono = str2number(csvMontoBono)
-                    try:
-                        excepcion = None if csvExcepcion == '' else Excepcion.objects.all().get(nombre=csvExcepcion)
-                    except Exception:
-                        nError += 1
-                        print(nLinea, "No existe Excepcion:"+csvExcepcion)
+
+                    lista = csvExcepcion.split('-')
+                    # Saca espacios sobrantes
+                    csvExcepcionList = [s.strip() for s in lista]
+                    excepcionList = []
+                    for csvElem in csvExcepcionList:
+                        csvElem = re.sub(' +', ' ', csvElem)
+                        try:
+                            if csvElem != '':
+                                excepcionList.append(Excepcion.objects.all().get(nombre=csvElem))
+                        except Exception:
+                            nError += 1
+                            print(nLinea, "No existe Excepcion:"+csvElem)
                     detalle = csvDetalle
                     preexistencia = str2number(csvPreexistencia)
                     estadoProcesal = str2number(csvEstadoProcesal)
@@ -261,7 +269,7 @@ class Command(BaseCommand):
                             bono_y_jus=bonoJus,
                             monto_jus=montoJus,
                             monto_bono=montoBono,
-                            excepcion=excepcion,
+                            # excepcion=excepcion,
                             detalle=detalle,
                             preexistencia=preexistencia,
                             estado_procesal=estadoProcesal,
@@ -296,6 +304,11 @@ class Command(BaseCommand):
                             fecha_facturado=fechaFacturado
                             )
                         print(causa)
+                        for excepcion in excepcionList:
+                            ExcepcionCausa.objects.create(
+                                causa=causa,
+                                excepcion=excepcion
+                            )
 
                     except DataError as e:
                         transaction.set_rollback(True)
