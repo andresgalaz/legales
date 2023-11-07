@@ -79,7 +79,7 @@ class Command(BaseCommand):
         with open(file_path, "r", encoding='utf8') as csv_file:
             data = list(csv.reader(csv_file, delimiter=";"))
             # Valida. Si hay errores no procesa nada
-            for nPasada in range(0, 1, 2):
+            for nPasada in range(0, 2):
                 print('Pasada:', nPasada)
                 nLinea = 1
                 for row in data:  # data[1:]:
@@ -234,7 +234,12 @@ class Command(BaseCommand):
                     ppmed = csvPpmed
                     ppsic = csvPpsic
                     pcont = csvPcont
-                    oficios = None if csvOficios == '' else Oficio.objects.all().get(nombre=csvOficios)
+                    try:
+                        oficios = None if csvOficios == '' else Oficio.objects.all().get(nombre=csvOficios)
+                    except Exception:
+                        nError += 1
+                        print(nLinea, "No existe oficio:"+csvOficios)
+
                     confesional = str2boolean(csvConfesional)
                     testimonial = str2boolean(csvTestimonial)
                     otrasPruebas = csvOtrasPruebas

@@ -10,3 +10,11 @@ insert into legales_excepcion (nombre) values('EXCEPCION DE FALTA DE LEGITIMACIO
 insert into legales_excepcion (nombre) values('EXCEPCION DE PRESCRIPCION');
 insert into legales_excepcion (nombre) values('ACUMULACION DE CAUSAS');
 insert into legales_excepcion (nombre) values('EXCEPCION DE COSA JUZGADA');
+
+
+- Estado Procesal
+- Excepcion
+- Jurisdiccion
+- Tipo de Proceso
+- Bono y Jus
+- oficio
