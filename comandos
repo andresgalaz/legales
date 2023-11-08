@@ -4,3 +4,4 @@ psql -d django_db -h localhost -U agalaz -w
 ./manage.py migrate
 ./manage.py runserver 0.0.0.0:8001
 ./manage.py importa_csv carga_inicial/causas.csv 
+./manage.py changepassword ROCIOHERRERA
