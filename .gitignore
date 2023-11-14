@@ -1,7 +1,6 @@
 .vscode/
 db.sqlite3
 legales/__init__.py
-legales/migrations/
 **.pyc
 static/
 **~
