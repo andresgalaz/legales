@@ -66,13 +66,10 @@ class TipoProceso(models.Model):
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
 
-#
 # class Oficio(models.Model):
 #     nombre = models.CharField(max_length=20)
-#
 #     class Meta:
 #         unique_together = [['nombre',]]
-#
 #     def __str__(self):
 #         return str(self.id) + ' - ' + self.nombre
 
@@ -172,7 +169,7 @@ class Causa(models.Model):
     ppsic = models.CharField(max_length=60, blank=True, null=True)
     pcont = models.CharField(max_length=60, blank=True, null=True)
     # oficios = models.ForeignKey(Oficio, models.SET_NULL, blank=True, null=True)
-    oficios2 = ModifiedArrayField(
+    oficios = ModifiedArrayField(
         models.CharField(
             choices=LABEL_OFICIOS,
             max_length=100,
