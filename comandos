@@ -1,4 +1,6 @@
 psql -d django_db -h localhost -U agalaz -w
+pg_dump -d django_db -h localhost -U agalaz -w > django_db.sql
+
 ./manage.py collectstatic
 ./manage.py makemigrations legales
 ./manage.py migrate

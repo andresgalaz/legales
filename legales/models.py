@@ -1,5 +1,17 @@
-from django.db import models
+from django import forms
+from django.contrib.postgres.fields import ArrayField
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
+
+
+class ModifiedArrayField(ArrayField):
+    def formfield(self, **kwargs):
+        defaults = {
+            "form_class": forms.MultipleChoiceField,
+            "choices": self.base_field.choices,
+            **kwargs
+        }
+        return super(ArrayField, self).formfield(**defaults)
 
 
 class Company(models.Model):
@@ -54,15 +66,15 @@ class TipoProceso(models.Model):
     def __str__(self):
         return str(self.id) + ' - ' + self.nombre
 
-
-class Oficio(models.Model):
-    nombre = models.CharField(max_length=20)
-
-    class Meta:
-        unique_together = [['nombre',]]
-
-    def __str__(self):
-        return str(self.id) + ' - ' + self.nombre
+#
+# class Oficio(models.Model):
+#     nombre = models.CharField(max_length=20)
+#
+#     class Meta:
+#         unique_together = [['nombre',]]
+#
+#     def __str__(self):
+#         return str(self.id) + ' - ' + self.nombre
 
 
 class EstadoProcesal(models.Model):
@@ -106,6 +118,15 @@ class ObservacionPericia(models.Model):
 
 
 class Causa(models.Model):
+    LABEL_OFICIOS = (
+        ("AFIP", "AFIP"),
+        ("CENTRO MEDICO", "CENTRO MEDICO"),
+        ("CORREO", "CORREO"),
+        ("EMPLEADOR", "EMPLEADOR"),
+        ("JUZGADO", "JUZGADO"),
+        ("SRT", "SRT"),
+        ("TRIBUNAL", "TRIBUNAL"),
+    )
     fecha_derivacion = models.DateField()
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     asunto = models.IntegerField()
@@ -150,7 +171,17 @@ class Causa(models.Model):
     ppmed = models.CharField(max_length=60, blank=True, null=True)
     ppsic = models.CharField(max_length=60, blank=True, null=True)
     pcont = models.CharField(max_length=60, blank=True, null=True)
-    oficios = models.ForeignKey(Oficio, models.SET_NULL, blank=True, null=True)
+    # oficios = models.ForeignKey(Oficio, models.SET_NULL, blank=True, null=True)
+    oficios2 = ModifiedArrayField(
+        models.CharField(
+            choices=LABEL_OFICIOS,
+            max_length=100,
+            blank=True,
+            null=True
+        ),
+        blank=True,
+        null=True
+    )
     confesional = models.BooleanField(default=False, null=True)
     testimonial = models.BooleanField(default=False, null=True)
     otras_pruebas = models.CharField(max_length=60, blank=True, null=True)
